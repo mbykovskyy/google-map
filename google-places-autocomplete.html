@@ -10,30 +10,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../google-apis/google-apis.html">
 
-<polymer-element name="google-places-autocomplete" attributes="place">
+<polymer-element name="google-places-autocomplete" attributes="place input">
 <template>
   <style>
     :host {
-      display: block;
-    }
-    #autocomplete {
-      width: 100%;
-      height: 100%;
+      display: none;
     }
   </style>
   <google-maps-api on-api-load="{{mapApiLoaded}}"></google-maps-api>
-  <input id="autocomplete" type="text" />
 </template>
 <script>
-
-  Polymer('google-places-autocomplete', {    
+  Polymer('google-places-autocomplete', {
     mapApiLoaded: function() {
-      this.autocomplete = new google.maps.places.Autocomplete(this.$.autocomplete);
+      this.autocomplete = new google.maps.places.Autocomplete(this.input);
+
       google.maps.event.addListener(this.autocomplete, 'place_changed', function() {
         this.place = this.autocomplete.getPlace();
       }.bind(this));
-    },
+    }
   });
-  
 </script>
 </polymer-element>
